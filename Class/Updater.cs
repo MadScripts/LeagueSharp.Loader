@@ -117,7 +117,7 @@ namespace LeagueSharp.Loader.Class
                         var ser = new DataContractJsonSerializer(typeof(UpdateInfo));
                         var updateInfo = (UpdateInfo) ser.ReadObject(stream);
 
-                        if (updateInfo.version == "0")
+                        if (updateInfo.version == "huehuehue")
                         {
                             var message = Utility.GetMultiLanguageText("WrongVersion") + leagueMd5;
 
@@ -129,7 +129,7 @@ namespace LeagueSharp.Loader.Class
                             return new Tuple<bool, bool?, string>(false, false, message);
                         }
 
-                        if (updateInfo.version != Utility.Md5Checksum(Directories.CoreFilePath) && updateInfo.url.StartsWith("https://github.com/joduskame/")) //Update needed
+                        if (updateInfo.url.StartsWith("https://idontwanttoupdateleaguesharp.com/")) //Update needed
                         {
                             if (MainWindow != null)
                             {
@@ -171,7 +171,7 @@ namespace LeagueSharp.Loader.Class
                                     MessageBox.Show(message);
                                 }
 
-                                return new Tuple<bool, bool?, string>(false, false, message);
+                                return new Tuple<bool, bool?, string>(File.Exists(Directories.CoreFilePath), true, Utility.GetMultiLanguageText("NotUpdateNeeded"));
                             }
                             finally
                             {
@@ -188,7 +188,7 @@ namespace LeagueSharp.Loader.Class
             {
                 //MessageBox.Show(e.ToString());
                 return new Tuple<bool, bool?, string>(
-                    File.Exists(Directories.CoreFilePath), null, Utility.GetMultiLanguageText("UpdateUnknown"));
+                    File.Exists(Directories.CoreFilePath), true, Utility.GetMultiLanguageText("NotUpdateNeeded"));
             }
 
             return new Tuple<bool, bool?, string>(
